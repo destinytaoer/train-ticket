@@ -11,7 +11,9 @@ import Submit from './components/Submit';
 function App(props) {
   return (
     <div>
-      <Header />
+      <div className="header-wrapper">
+        <Header title="火车票" />
+      </div>
       <Journey />
       <DepartDate />
       <HighSpeed />
