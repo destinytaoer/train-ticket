@@ -9,11 +9,15 @@ import Journey from './components/Journey';
 import DepartDate from './components/DepartDate';
 import HighSpeed from './components/HighSpeed';
 import Submit from './components/Submit';
+import CitySelector from '../common/CitySelector';
 
 function App(props) {
   const { 
     from,
     to,
+    isCitySelectorVisible,
+    cityData,
+    isCityDataLoading,
     dispatch
   } = props;
 
@@ -42,6 +46,14 @@ function App(props) {
         <HighSpeed />
         <Submit />
       </form>
+      <CitySelector
+        show={isCitySelectorVisible}
+        cityData={cityData}
+        isLoading={isCityDataLoading}
+        handleBack={cbs.hideCitySelector}
+        fetchCityData={cbs.fetchCityData}
+        handleSelect={cbs.setSelectedCity}
+      />
     </div>
   )
 }

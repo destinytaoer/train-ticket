@@ -1,4 +1,5 @@
 import { SET_FROM, SET_TO } from './actionTypes';
+import { hideCitySelector } from "./setCitySelectorVisible";
 
 function setFrom(city) {
   return {
@@ -18,10 +19,11 @@ export function setSelectedCity(city) {
   return (dispatch, getState) => {
     const { isLeftCity } = getState();
     if (isLeftCity) {
-      dispatch(setFrom());
+      dispatch(setFrom(city));
     } else {
-      dispatch(setTo())
+      dispatch(setTo(city))
     }
+    dispatch(hideCitySelector());
   }
 }
 
