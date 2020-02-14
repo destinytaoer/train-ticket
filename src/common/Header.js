@@ -2,12 +2,12 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Header.css'
 
-export default function Header(props) {
-  const { title, handleBack } = props;
+function Header(props) {
+  const { title, isBackVisible, handleBack } = props;
   return (
     <div className="header">
       {
-        handleBack ?
+        isBackVisible ?
           <div className="header-back" onClick={handleBack}>
             <svg width="42" height="42">
               <polyline
@@ -29,6 +29,9 @@ export default function Header(props) {
 }
 
 Header.propTypes = {
-  handleBack: PropTypes.func,
+  handleBack: PropTypes.func.isRequired,
+  isBackVisible: PropTypes.bool,
   title: PropTypes.string.isRequired
 }
+
+export default Header;
