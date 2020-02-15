@@ -13,8 +13,6 @@ function DepartDate(props) {
 
   const isToday = useMemo(() => newTime === h0(), [newTime]);
 
-  console.log(isToday, newTime, h0())
-
   const departDateString = useMemo(() => {
     return dayjs(newTime).format('YYYY-MM-DD');
   }, [newTime]);
@@ -30,7 +28,7 @@ function DepartDate(props) {
   )
 }
 DepartDate.propTypes = {
-  time: PropTypes.string.isRequired,
+  time: PropTypes.number.isRequired,
   handleClick: PropTypes.func.isRequired,
 }
 
