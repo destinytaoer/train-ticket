@@ -21,6 +21,7 @@ function App(props) {
     cityData,
     isCityDataLoading,
     date,
+    isHighSpeed,
     dispatch
   } = props;
 
@@ -51,7 +52,7 @@ function App(props) {
           showCitySelector={cbs.showCitySelector}
         />
         <DepartDate time={date} handleClick={cbs.showDateSelector}/>
-        <HighSpeed />
+        <HighSpeed isHighSpeed={isHighSpeed} toggle={cbs.toggleHighSpeed}/>
         <Submit />
       </form>
       <CitySelector
