@@ -1,8 +1,37 @@
-import React from 'react';
-import './DepartDate.css'
+import React, {useMemo} from 'react';
+import PropTypes from "prop-types";
+import dayjs from 'dayjs';
 
-export default function DepartDate(props) {
+import { h0 } from '../../common/fp';
+import './DepartDate.css';
+
+function DepartDate(props) {
+  const { time, handleClick } = props;
+
+  const newTime = h0(time);
+  const departDate = useMemo(() => new Date(newTime), [newTime]);
+
+  const isToday = useMemo(() => newTime === h0(), [newTime]);
+
+  console.log(isToday, newTime, h0())
+
+  const departDateString = useMemo(() => {
+    return dayjs(newTime).format('YYYY-MM-DD');
+  }, [newTime]);
+
+  const weekString = useMemo(() => '星期' + ['日', '一', '二', '三', '四', '五', '六'][departDate.getDay()] + (isToday ? ' (今天)' : ''), [departDate, isToday]);
+
   return (
-    <div></div>
+    <div className="depart-date" onClick={handleClick}>
+      <input type="hidden" name="date" value={departDateString} />
+      <span>{departDateString}</span>
+      <span className="depart-week">{weekString}</span>
+    </div>
   )
 }
+DepartDate.propTypes = {
+  time: PropTypes.string.isRequired,
+  handleClick: PropTypes.func.isRequired,
+}
+
+export default DepartDate;

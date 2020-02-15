@@ -18,6 +18,7 @@ function App(props) {
     isCitySelectorVisible,
     cityData,
     isCityDataLoading,
+    date,
     dispatch
   } = props;
 
@@ -42,7 +43,7 @@ function App(props) {
           exchangeFromTo={cbs.exchangeFromTo}
           showCitySelector={cbs.showCitySelector}
         />
-        <DepartDate />
+        <DepartDate time={date} handleClick={cbs.showDateSelector}/>
         <HighSpeed />
         <Submit />
       </form>
