@@ -10,12 +10,14 @@ import DepartDate from './components/DepartDate';
 import HighSpeed from './components/HighSpeed';
 import Submit from './components/Submit';
 import CitySelector from '../common/CitySelector';
+import DateSelector from '../common/DateSelector';
 
 function App(props) {
   const { 
     from,
     to,
     isCitySelectorVisible,
+    isDateSelectorVisible,
     cityData,
     isCityDataLoading,
     date,
@@ -29,7 +31,12 @@ function App(props) {
   
   const handleBack = useCallback(() => {
     window.history.back();
-  },[])
+  }, [])
+  
+  const handleSelectDate = useCallback((date) => {
+    cbs.setDate(date);
+    cbs.hideDateSelector();
+  }, [cbs]);
 
   return (
     <div>
@@ -54,6 +61,11 @@ function App(props) {
         handleBack={cbs.hideCitySelector}
         fetchCityData={cbs.fetchCityData}
         handleSelect={cbs.setSelectedCity}
+      />
+      <DateSelector
+        show={isDateSelectorVisible}
+        handleBack={cbs.hideDateSelector}
+        handleSelect={handleSelectDate}
       />
     </div>
   )

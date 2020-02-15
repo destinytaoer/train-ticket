@@ -5,12 +5,14 @@ import { reducer as setCitySelectorVisibleReducer } from './setCitySelectorVisib
 import { reducer as setDateSelectorVisibleReducer } from './setDateSelectorVisible';
 import { reducer as setSelectedCityReducer } from './setSelectedCity';
 import { reducer as toggleHighSpeedReducer } from './toggleHighSpeed';
+import { reducer as setDateReducer } from "./setDate";
 
 const reducers = [
   setCityDataReducer,
   setCityDataLoadingReducer,
   setCitySelectorVisibleReducer,
   setDateSelectorVisibleReducer,
+  setDateReducer,
   setSelectedCityReducer,
   toggleHighSpeedReducer
 ];
