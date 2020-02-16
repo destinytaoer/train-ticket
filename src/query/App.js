@@ -1,5 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from "redux";
+import * as actions from './store/actions';
 
 import './App.css';
 import Nav from '../common/Nav';
@@ -17,6 +19,6 @@ function App(props) {
 }
 
 export default connect(
-  state => { return {} },
-  dispatch => {return {}}
+  state => { return {...state} },
+  dispatch => { return dispatch }
 )(App);
