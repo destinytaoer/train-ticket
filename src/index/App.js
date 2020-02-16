@@ -44,7 +44,7 @@ function App(props) {
       <div className="header-wrapper">
         <Header title="火车票" handleBack={handleBack} />
       </div>
-      <form className="form">
+      <form action="./query.html" className="form">
         <Journey
           from={from}
           to={to}
