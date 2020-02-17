@@ -31,12 +31,13 @@ function App(props) {
     arriveTimeStart,
     arriveTimeEnd,
     trainList,
+    isFiltersActive,
     dispatch
   } = props;
 
   const cbs = useMemo(() => {
     return bindActionCreators(actions, dispatch);
-  }, [dispatch])
+  }, [dispatch]);
 
   useEffect(() => {
     const queries = URI.parseQuery(window.location.search);
@@ -124,6 +125,10 @@ function App(props) {
 
   const { isPrevDisabled, isNextDisabled, prev, next } = useNav(date, cbs.prevDate, cbs.nextDate);
 
+  const showFilters = useCallback(() => {
+    cbs.setFiltersActive(true);
+  }, [cbs])
+
   if (!isSearchParsed) {
     return null;
   }
@@ -143,7 +148,16 @@ function App(props) {
       <List
         list={trainList}
       />
-      <Filter />
+      <Filter
+        orderType={orderType}
+        toggleOrderType={cbs.toggleOrderType}
+        isHighSpeed={isHighSpeed}
+        toggleHighSpeed={cbs.toggleHighSpeed}
+        hasTicket={hasTicket}
+        toggleHasTicket={cbs.toggleHasTicket}
+        isFiltersActive={isFiltersActive}
+        showFilters={showFilters}
+      />
     </div>
   )
 }
