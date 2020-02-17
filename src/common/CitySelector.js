@@ -23,13 +23,13 @@ CityItem.propTypes = {
 
 // 每个城市拼音分组
 const CitySection = memo(function CitySection(props) {
-  const { title, cities, handleSelect } = props;
+  const { title, cities=[], handleSelect } = props;
   return (
     <ul className="city-ul">
       <li className="city-li" key={title} data-cate={title}>{title}</li>
       {
         cities.map(city => {
-          return <CityItem key={city} name={city} handleSelect={handleSelect} />
+          return <CityItem key={city.name} name={city.name} handleSelect={handleSelect} />
         })
       }
     </ul>
@@ -37,7 +37,7 @@ const CitySection = memo(function CitySection(props) {
 })
 CitySection.propTypes = {
   title: PropTypes.string.isRequired,
-  cities: PropTypes.array.isRequired,
+  cities: PropTypes.array,
   handleSelect: PropTypes.func.isRequired
 }
 
@@ -77,7 +77,7 @@ const CityList = memo(function CityList(props) {
               <CitySection
                 key={section.title}
                 title={section.title}
-                cities={section.cities}
+                cities={section.citys}
                 handleSelect={handleSelect}
               />
             )
@@ -119,7 +119,7 @@ const Suggest = memo(function Suggest(props) {
   const [result, setResult] = useState([]);
 
   useEffect(() => {
-    fetch('/search?key=' + encodeURIComponent(searchKey))
+    fetch('/rest/search?key=' + encodeURIComponent(searchKey))
       .then(res => res.json())
       .then(data => {
         const { result, searchKey: sKey } = data;
@@ -174,7 +174,7 @@ const CitySelector = memo(function CitySelector(props) {
       return <div>loading</div>
     }
     if (cityData) {
-      return <CityList sections={cityData} handleSelect={handleSelect} toAlpha={toAlpha}/>
+      return <CityList sections={cityData.cityList} handleSelect={handleSelect} toAlpha={toAlpha}/>
     }
     return <div>error</div>
   }, [isLoading, cityData, handleSelect, toAlpha])

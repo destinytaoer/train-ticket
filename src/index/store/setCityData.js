@@ -22,7 +22,7 @@ export function fetchCityData() {
       dispatch(setCityData(cache.data));
     }
 
-    fetch('/cities?_' + Date.now())
+    fetch('/rest/cities?_' + Date.now())
       .then(res => res.json())
       .then(cityData => {
         dispatch(setCityData(cityData));

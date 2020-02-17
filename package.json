@@ -63,6 +63,7 @@
     "style-loader": "1.0.0",
     "terser-webpack-plugin": "2.2.1",
     "ts-pnp": "1.1.5",
+    "urijs": "^1.19.2",
     "url-loader": "2.3.0",
     "webpack": "4.41.2",
     "webpack-dev-server": "3.9.0",
@@ -73,7 +74,7 @@
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
     "test": "node scripts/test.js",
-    "service": "node service/index.js"
+    "mock": "node ./server/index.js"
   },
   "proxy": "http://localhost:5000",
   "eslintConfig": {
@@ -153,6 +154,7 @@
     ]
   },
   "devDependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "mocker-api": "^1.12.2"
   }
 }
