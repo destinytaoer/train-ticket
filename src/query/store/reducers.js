@@ -11,7 +11,7 @@ import { reducer as setLeaveStationsReducer } from './setLeaveStations';
 import { reducer as setArriveStationsReducer } from './setArriveStations';
 import { reducer as setLeaveTimeReducer } from './setLeaveTime';
 import { reducer as setArriveTimeReducer } from './setArriveTime';
-import { reducer as setFilterActiveReducer } from './setFilterActive';
+import { reducer as setFiltersActiveReducer } from './setFiltersActive';
 import { reducer as setSearchParsedReducer } from './setSearchParsed';
 
 const reducers = [
@@ -27,7 +27,7 @@ const reducers = [
   setArriveStationsReducer,
   setLeaveTimeReducer,
   setArriveTimeReducer,
-  setFilterActiveReducer,
+  setFiltersActiveReducer,
   setSearchParsedReducer,
 ];
 

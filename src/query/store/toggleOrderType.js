@@ -1,7 +1,7 @@
 import { SET_ORDER_TYPE } from "./actionTypes";
 import { ORDER_DEPART, ORDER_DURATION } from '../constants';
 
-export function toggleOrderType(orderType) {
+export function toggleOrderType() {
   return (dispatch, getState) => {
     const { orderType } = getState();
     if (orderType === ORDER_DEPART) {

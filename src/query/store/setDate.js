@@ -1,10 +1,10 @@
 import { SET_DATE } from "./actionTypes";
 import {h0} from '../../common/fp'
 
-export function setDate(city) {
+export function setDate(date) {
   return {
     type: SET_DATE,
-    payload: city
+    payload: date
   }
 }
 
@@ -26,7 +26,7 @@ export function reducer(state, action) {
   const { type, payload } = action;
   switch (type) {
     case SET_DATE:
-      return { ...state, city: payload };
+      return { ...state, date: payload };
     default:
       return state;
   }

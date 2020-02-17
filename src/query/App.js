@@ -20,5 +20,5 @@ function App(props) {
 
 export default connect(
   state => { return {...state} },
-  dispatch => { return dispatch }
+  dispatch => { return {dispatch} }
 )(App);
