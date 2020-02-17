@@ -12,7 +12,7 @@ function Filter(props) {
     toggleOrderType,
     toggleHighSpeed,
     toggleHasTicket,
-    showFilters
+    toggleFiltersActive
   } = props;
 
   return (
@@ -30,7 +30,7 @@ function Filter(props) {
           <i className="icon">{hasTicket ? '\uf43d' : '\uf43c'}</i>
           只看有票
         </span>
-        <span className={["item", isFiltersActive ? 'item-on' : ''].filter(Boolean).join(' ')} onClick={() => showFilters()}>
+        <span className={["item", isFiltersActive ? 'item-on' : ''].filter(Boolean).join(' ')} onClick={() => toggleFiltersActive()}>
           <i className="icon">{'\uf0f7'}</i>
           综合筛选
         </span>
@@ -46,7 +46,7 @@ Filter.propTypes = {
   toggleOrderType: PropTypes.func.isRequired,
   toggleHighSpeed: PropTypes.func.isRequired,
   toggleHasTicket: PropTypes.func.isRequired,
-  showFilter: PropTypes.func.isRequired,
+  toggleFiltersActive: PropTypes.func.isRequired,
 }
 
 export default Filter

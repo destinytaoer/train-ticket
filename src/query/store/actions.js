@@ -10,5 +10,5 @@ export { setLeaveStations, setCheckedLeaveStations } from './setLeaveStations';
 export { setArriveStations, setCheckedArriveStation } from './setArriveStations';
 export { setLeaveTimeStart, setLeaveTimeEnd } from './setLeaveTime';
 export { setArriveTimeStart, setArriveTimeEnd } from './setArriveTime';
-export { setFiltersActive } from './setFiltersActive';
+export { toggleFiltersActive } from './setFiltersActive';
 export { setSearchParsed } from './setSearchParsed';

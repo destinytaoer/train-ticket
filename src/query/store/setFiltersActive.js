@@ -1,9 +1,13 @@
 import { SET_FILTERS_ACTIVE } from "./actionTypes";
 
-export function setFiltersActive(isFiltersActive) {
-  return {
-    type: SET_FILTERS_ACTIVE,
-    payload: isFiltersActive
+export function toggleFiltersActive() {
+  return (dispatch, getState) => {
+    const { isFiltersActive } = getState();
+
+    dispatch({
+      type: SET_FILTERS_ACTIVE,
+      payload: !isFiltersActive
+    })
   }
 }
 

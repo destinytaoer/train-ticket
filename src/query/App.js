@@ -125,10 +125,6 @@ function App(props) {
 
   const { isPrevDisabled, isNextDisabled, prev, next } = useNav(date, cbs.prevDate, cbs.nextDate);
 
-  const showFilters = useCallback(() => {
-    cbs.setFiltersActive(true);
-  }, [cbs])
-
   if (!isSearchParsed) {
     return null;
   }
@@ -156,7 +152,7 @@ function App(props) {
         hasTicket={hasTicket}
         toggleHasTicket={cbs.toggleHasTicket}
         isFiltersActive={isFiltersActive}
-        showFilters={showFilters}
+        toggleFiltersActive={cbs.toggleFiltersActive}
       />
     </div>
   )
