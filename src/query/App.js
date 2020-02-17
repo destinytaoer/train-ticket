@@ -30,6 +30,7 @@ function App(props) {
     leaveTimeEnd,
     arriveTimeStart,
     arriveTimeEnd,
+    trainList,
     dispatch
   } = props;
 
@@ -139,7 +140,9 @@ function App(props) {
         prev={prev}
         next={next}
       />
-      <List />
+      <List
+        list={trainList}
+      />
       <Filter />
     </div>
   )
