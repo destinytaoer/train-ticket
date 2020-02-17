@@ -42,7 +42,11 @@ function App(props) {
   return (
     <div>
       <div className="header-wrapper">
-        <Header title="火车票" handleBack={handleBack} />
+        <Header
+          title="火车票"
+          isBackVisible={false}
+          handleBack={handleBack}
+        />
       </div>
       <form action="./query.html" className="form">
         <Journey

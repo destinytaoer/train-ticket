@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import './Header.css'
 
 function Header(props) {
-  const { title, isBackVisible, handleBack } = props;
+  const { title, isBackVisible=true, handleBack } = props;
   return (
     <div className="header">
       {
