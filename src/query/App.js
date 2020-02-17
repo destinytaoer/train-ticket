@@ -9,6 +9,7 @@ import {h0} from '../common/fp';
 import './App.css';
 import Header from '../common/Header';
 import Nav from '../common/Nav';
+import useNav from '../common/useNav';
 import List from './components/List';
 import Filter from './components/Filter';
 
@@ -120,6 +121,8 @@ function App(props) {
     window.history.back();
   }, []);
 
+  const { isPrevDisabled, isNextDisabled, prev, next } = useNav(date, cbs.prevDate, cbs.nextDate);
+
   if (!isSearchParsed) {
     return null;
   }
@@ -129,7 +132,13 @@ function App(props) {
       <div className="header-wrapper">
         <Header title={`${from} → ${to}`} handleBack={handleBack}/>
       </div>
-      <Nav />
+      <Nav
+        date={date}
+        isPrevDisabled={isPrevDisabled}
+        isNextDisabled={isNextDisabled}
+        prev={prev}
+        next={next}
+      />
       <List />
       <Filter />
     </div>
