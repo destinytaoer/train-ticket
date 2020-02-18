@@ -1,7 +1,7 @@
 import React, { memo, useState, useMemo, useRef, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import leftPad from 'left-pad';
-import useWinSize from '../common/useWinSize';
+import useWinSize from '../../common/useWinSize';
 import './Slider.css';
 
 const Slider = memo(function Slider(props) {
@@ -18,8 +18,21 @@ const Slider = memo(function Slider(props) {
   const range = useRef();
   const rangeWidth = useRef();
 
+  const prevCurrentStartHours = useRef(currentStartHours);
+  const prevCurrentEndHours = useRef(currentEndHours);
+
   const [start, setStart] = useState(() => (currentStartHours / 24) * 100);
   const [end, setEnd] = useState(() => (currentEndHours / 24) * 100);
+
+  if (prevCurrentStartHours.current !== currentStartHours) {
+    setStart((currentStartHours / 24) * 100);
+    prevCurrentStartHours.current = currentStartHours;
+  }
+
+  if (prevCurrentEndHours.current !== currentEndHours) {
+    setEnd((currentEndHours / 24) * 100);
+    prevCurrentEndHours.current = currentEndHours;
+  }
 
   const startPercent = useMemo(() => {
     if (start > 100) {
