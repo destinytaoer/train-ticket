@@ -22,10 +22,14 @@ function App(props) {
     isSearchParsed,
     orderType,
     hasTicket,
+    ticketTypes,
+    trainTypes,
+    leaveStations,
+    arriveStations,
     checkedTicketTypes,
     checkedTrainTypes,
     checkedLeaveStations,
-    checkedArriveStation,
+    checkedArriveStations,
     leaveTimeStart,
     leaveTimeEnd,
     arriveTimeStart,
@@ -69,7 +73,7 @@ function App(props) {
       .search('checkedTicketTypes', Object.keys(checkedTicketTypes).join())
       .search('checkedTrainTypes', Object.keys(checkedTrainTypes).join())
       .search('checkedLeaveStations', Object.keys(checkedLeaveStations).join())
-      .search('checkedArriveStation', Object.keys(checkedArriveStation).join())
+      .search('checkedArriveStation', Object.keys(checkedArriveStations).join())
       .search('leaveTimeStart', leaveTimeStart)
       .search('leaveTimeEnd', leaveTimeEnd)
       .search('arriveTimeStart', arriveTimeStart)
@@ -84,10 +88,10 @@ function App(props) {
             directTrainInfo: {
               trains,
               filter: {
-                ticketTypes,
-                trainTypes,
-                leaveStations,
-                arriveStations
+                ticketType,
+                trainType,
+                depStation,
+                arrStation
               }
             }
           }
@@ -95,10 +99,10 @@ function App(props) {
 
         const { setTrainList, setTicketTypes, setTrainTypes, setLeaveStations, setArriveStations } = cbs;
         setTrainList(trains);
-        setTicketTypes(ticketTypes);
-        setTrainTypes(trainTypes);
-        setLeaveStations(leaveStations);
-        setArriveStations(arriveStations);
+        setTicketTypes(ticketType);
+        setTrainTypes(trainType);
+        setLeaveStations(depStation);
+        setArriveStations(arrStation);
       })
   }, [
     from,
@@ -111,7 +115,7 @@ function App(props) {
     checkedTicketTypes,
     checkedTrainTypes,
     checkedLeaveStations,
-    checkedArriveStation,
+    checkedArriveStations,
     leaveTimeStart,
     leaveTimeEnd,
     arriveTimeStart,
@@ -124,6 +128,38 @@ function App(props) {
   }, []);
 
   const { isPrevDisabled, isNextDisabled, prev, next } = useNav(date, cbs.prevDate, cbs.nextDate);
+
+  const filterCbs = useMemo(() => {
+    const {
+      toggleOrderType,
+      toggleHighSpeed,
+      toggleHasTicket,
+      toggleFiltersActive,
+      setCheckedTicketTypes,
+      setCheckedTrainTypes,
+      setCheckedLeaveStations,
+      setCheckedArriveStations,
+      setLeaveTimeStart,
+      setLeaveTimeEnd,
+      setArriveTimeStart,
+      setArriveTimeEnd,
+    } = cbs;
+
+    return {
+      toggleOrderType,
+      toggleHighSpeed,
+      toggleHasTicket,
+      toggleFiltersActive,
+      setCheckedTicketTypes,
+      setCheckedTrainTypes,
+      setCheckedLeaveStations,
+      setCheckedArriveStations,
+      setLeaveTimeStart,
+      setLeaveTimeEnd,
+      setArriveTimeStart,
+      setArriveTimeEnd,
+    }
+  }, [cbs]);
 
   if (!isSearchParsed) {
     return null;
@@ -146,13 +182,22 @@ function App(props) {
       />
       <Filter
         orderType={orderType}
-        toggleOrderType={cbs.toggleOrderType}
         isHighSpeed={isHighSpeed}
-        toggleHighSpeed={cbs.toggleHighSpeed}
         hasTicket={hasTicket}
-        toggleHasTicket={cbs.toggleHasTicket}
         isFiltersActive={isFiltersActive}
-        toggleFiltersActive={cbs.toggleFiltersActive}
+        ticketTypes={ticketTypes}
+        trainTypes={trainTypes}
+        leaveStations={leaveStations}
+        arriveStations={arriveStations}
+        checkedTicketTypes={checkedTicketTypes}
+        checkedTrainTypes={checkedTrainTypes}
+        checkedLeaveStations={checkedLeaveStations}
+        checkedArriveStations={checkedArriveStations}
+        leaveTimeStart={leaveTimeStart}
+        leaveTimeEnd={leaveTimeEnd}
+        arriveTimeStart={arriveTimeStart}
+        arriveTimeEnd={arriveTimeEnd}
+        {...filterCbs}
       />
     </div>
   )

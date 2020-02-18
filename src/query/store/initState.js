@@ -14,7 +14,7 @@ const initState = {
   leaveStations: [],
   checkedLeaveStations: {},
   arriveStations: [],
-  checkedArriveStation: {},
+  checkedArriveStations: {},
   leaveTimeStart: 0,
   leaveTimeEnd: 24,
   arriveTimeStart: 0,

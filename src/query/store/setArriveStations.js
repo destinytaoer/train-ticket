@@ -6,10 +6,10 @@ export function setArriveStations(arriveStations) {
     payload: arriveStations
   }
 }
-export function setCheckedArriveStation(checkedArriveStation) {
+export function setCheckedArriveStations(checkedArriveStations) {
   return {
     type: SET_CHECKED_ARRIVE_STATION,
-    payload: checkedArriveStation
+    payload: checkedArriveStations
   }
 }
 
@@ -19,7 +19,7 @@ export function reducer(state, action) {
     case SET_ARRIVE_STATIONS:
       return { ...state, arriveStations: payload };
     case SET_CHECKED_ARRIVE_STATION:
-      return { ...state, checkedArriveStation: payload };
+      return { ...state, checkedArriveStations: payload };
     default:
       return state;
   }

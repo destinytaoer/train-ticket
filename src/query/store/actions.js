@@ -7,7 +7,7 @@ export { toggleHasTicket } from './toggleHasTicket';
 export { setTicketTypes, setCheckedTicketTypes } from './setTicketTypes';
 export { setTrainTypes, setCheckedTrainTypes } from './setTrainTypes';
 export { setLeaveStations, setCheckedLeaveStations } from './setLeaveStations';
-export { setArriveStations, setCheckedArriveStation } from './setArriveStations';
+export { setArriveStations, setCheckedArriveStations } from './setArriveStations';
 export { setLeaveTimeStart, setLeaveTimeEnd } from './setLeaveTime';
 export { setArriveTimeStart, setArriveTimeEnd } from './setArriveTime';
 export { toggleFiltersActive } from './setFiltersActive';
