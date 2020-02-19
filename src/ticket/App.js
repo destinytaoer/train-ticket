@@ -56,6 +56,10 @@ function App(props) {
     setSearchParsed(true);
   }, [cbs]);
 
+  useEffect(() => {
+    document.title = trainNumber;
+  }, [trainNumber]);
+
   const handleBack = useCallback(() => {
     window.history.back();
   }, []);
