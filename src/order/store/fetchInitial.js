@@ -7,9 +7,9 @@ export function fetchInitial(url) {
     fetch(url)
       .then(res => res.json())
       .then(data => {
-        const { deparTimeStr, arriveTimeStr, arriveDate, durationStr, price } = data;
+        const { departTimeStr, arriveTimeStr, arriveDate, durationStr, price } = data;
 
-        dispatch(setLeaveTime(deparTimeStr));
+        dispatch(setLeaveTime(departTimeStr));
         dispatch(setArriveTime(arriveTimeStr));
         dispatch(setArriveDate(arriveDate));
         dispatch(setDurationStr(durationStr));

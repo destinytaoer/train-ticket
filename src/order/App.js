@@ -8,6 +8,7 @@ import { h0 } from '../common/fp';
 
 import './App.css';
 import Header from '../common/Header';
+import Detail from '../common/Detail';
 import Account from './components/Account';
 import Choose from './components/Choose';
 import Passengers from './components/Passengers';
@@ -83,6 +84,17 @@ function App(props) {
       <div className='header-wrapper'>
         <Header title='订单填写' handleBack={handleBack} isBackVisible={true} />
       </div>
+      <Detail
+        leaveDate={leaveDate}
+        arriveDate={arriveDate}
+        leaveTime={leaveTime}
+        arriveTime={arriveTime}
+        leaveStation={leaveStation}
+        arriveStation={arriveStation}
+        trainNumber={trainNumber}
+        durationStr={durationStr}>
+        <span style={{ display: 'block' }} className='train-icon'></span>
+      </Detail>
     </div>
   );
 }
