@@ -14,6 +14,7 @@ import Candidate from './components/Candidate';
 // import Schedule from './components/Schedule';
 
 import useNav from '../common/useNav';
+import { TrainContext } from './context';
 
 // 异步组件
 const Schedule = lazy(() => import('./components/Schedule'));
@@ -123,6 +124,9 @@ function App(props) {
         durationStr={durationStr}
         toggle={cbs.toggleScheduleVisible}
       />
+      <TrainContext.Provider value={{ trainNumber, leaveDate, leaveStation, arriveStation }}>
+        <Candidate tickets={tickets} />
+      </TrainContext.Provider>
       {isScheduleVisible && (
         <div className='mask' onClick={() => cbs.toggleScheduleVisible()}>
           <Suspense fallback={<div>loading</div>}>
