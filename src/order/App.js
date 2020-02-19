@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './store/actions';
@@ -28,7 +28,18 @@ function App(props) {
     searchParsed,
     dispatch
   } = props;
-  return <div>order</div>;
+
+  const handleBack = useCallback(() => {
+    window.history.back();
+  }, []);
+
+  return (
+    <div className='app'>
+      <div className='header-wrapper'>
+        <Header title='订单填写' handleBack={handleBack} isBackVisible={true} />
+      </div>
+    </div>
+  );
 }
 
 export default connect(
