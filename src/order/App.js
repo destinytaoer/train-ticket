@@ -1,7 +1,10 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useMemo } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './store/actions';
+import URI from 'urijs';
+import dayjs from 'dayjs';
+import { h0 } from '../common/fp';
 
 import './App.css';
 import Header from '../common/Header';
@@ -25,13 +28,55 @@ function App(props) {
     passengers,
     menu,
     isMenuVisible,
-    searchParsed,
+    isSearchParsed,
     dispatch
   } = props;
+
+  const cbs = useMemo(() => {
+    return bindActionCreators(actions, dispatch);
+  }, [dispatch]);
+
+  useEffect(() => {
+    const queries = URI.parseQuery(window.location.search);
+
+    const { trainNumber, leaveStation, arriveStation, type, date } = queries;
+
+    const {
+      setTrainNumber,
+      setLeaveStation,
+      setArriveStation,
+      setSeatType,
+      setLeaveDate,
+      setSearchParsed
+    } = cbs;
+
+    setTrainNumber(trainNumber);
+    setLeaveStation(leaveStation);
+    setArriveStation(arriveStation);
+    setSeatType(type);
+    setLeaveDate(h0(dayjs(date).valueOf()));
+
+    setSearchParsed(true);
+  }, [cbs]);
+
+  useEffect(() => {
+    if (!isSearchParsed) return;
+
+    const url = new URI('/rest/order')
+      .setSearch('dStation', leaveStation)
+      .setSearch('aStation', arriveStation)
+      .setSearch('type', seatType)
+      .setSearch('date', dayjs(leaveDate).format('YYYY-MM-DD'))
+      .toString();
+
+    cbs.fetchInitial(url);
+  }, [isSearchParsed, leaveStation, arriveStation, seatType, leaveDate, cbs]);
 
   const handleBack = useCallback(() => {
     window.history.back();
   }, []);
+
+  if (!isSearchParsed) return null;
 
   return (
     <div className='app'>

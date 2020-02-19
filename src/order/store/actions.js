@@ -9,3 +9,4 @@ export { setPassengers } from './setPassengers';
 export { setMenu } from './setMenu';
 export { setSearchParsed } from './setSearchParsed';
 export { toggleMenuVisible } from './toggleMenuVisible';
+export { fetchInitial } from './fetchInitial';

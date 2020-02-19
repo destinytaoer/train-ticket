@@ -12,7 +12,7 @@ const initState = {
   passengers: [],
   menu: null,
   isMenuVisible: false,
-  searchParsed: false
+  isSearchParsed: false
 };
 
 export default initState;
