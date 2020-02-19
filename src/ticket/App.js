@@ -9,7 +9,7 @@ import { h0 } from '../common/fp';
 import './App.css';
 import Header from '../common/Header';
 import Nav from '../common/Nav';
-import Detail from './components/Detail';
+import Detail from '../common/Detail';
 import Candidate from './components/Candidate';
 // import Schedule from './components/Schedule';
 
@@ -121,9 +121,13 @@ function App(props) {
         leaveStation={leaveStation}
         arriveStation={arriveStation}
         trainNumber={trainNumber}
-        durationStr={durationStr}
-        toggle={cbs.toggleScheduleVisible}
-      />
+        durationStr={durationStr}>
+        <span className='left'></span>
+        <span className='schedule' onClick={() => cbs.toggleScheduleVisible()}>
+          时刻表
+        </span>
+        <span className='right'></span>
+      </Detail>
       <TrainContext.Provider value={{ trainNumber, leaveDate, leaveStation, arriveStation }}>
         <Candidate tickets={tickets} />
       </TrainContext.Provider>
