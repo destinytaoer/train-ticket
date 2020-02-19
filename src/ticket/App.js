@@ -102,15 +102,24 @@ function App(props) {
       <div className='header-wrapper'>
         <Header title={trainNumber} handleBack={handleBack} isBackVisible={true} />
       </div>
-      <div className='nav-wrapper'>
-        <Nav
-          date={leaveDate}
-          isPrevDisabled={isPrevDisabled}
-          isNextDisabled={isNextDisabled}
-          prev={prev}
-          next={next}
-        />
-      </div>
+      <Nav
+        date={leaveDate}
+        isPrevDisabled={isPrevDisabled}
+        isNextDisabled={isNextDisabled}
+        prev={prev}
+        next={next}
+      />
+      <Detail
+        leaveDate={leaveDate}
+        arriveDate={arriveDate}
+        leaveTime={leaveTime}
+        arriveTime={arriveTime}
+        leaveStation={leaveStation}
+        arriveStation={arriveStation}
+        trainNumber={trainNumber}
+        durationStr={durationStr}
+        toggle={cbs.toggleScheduleVisible}
+      />
     </div>
   );
 }
