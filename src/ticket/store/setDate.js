@@ -1,4 +1,5 @@
 import { SET_LEAVE_DATE, SET_ARRIVE_DATE } from './actionTypes';
+import { h0 } from '../../common/fp';
 
 export function setLeaveDate(date) {
   return {
@@ -11,6 +12,20 @@ export function setArriveDate(date) {
   return {
     type: SET_ARRIVE_DATE,
     payload: date
+  };
+}
+
+export function nextDate() {
+  return (dispatch, getState) => {
+    const { leaveDate } = getState();
+    dispatch(setLeaveDate(h0(leaveDate) + 86400 * 1000));
+  };
+}
+
+export function prevDate() {
+  return (dispatch, getState) => {
+    const { leaveDate } = getState();
+    dispatch(setLeaveDate(h0(leaveDate) - 86400 * 1000));
   };
 }
 

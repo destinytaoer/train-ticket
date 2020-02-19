@@ -1,4 +1,4 @@
-export { setLeaveDate, setArriveDate } from './setDate';
+export { setLeaveDate, setArriveDate, nextDate, prevDate } from './setDate';
 export { setLeaveTime, setArriveTime } from './setTime';
 export { setLeaveStation, setArriveStation } from './setStation';
 export { setTickets } from './setTickets';

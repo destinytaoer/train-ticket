@@ -8,9 +8,12 @@ import { h0 } from '../common/fp';
 
 import './App.css';
 import Header from '../common/Header';
+import Nav from '../common/Nav';
 import Detail from './components/Detail';
 import Candidate from './components/Candidate';
 import Schedule from './components/Schedule';
+
+import useNav from '../common/useNav';
 
 function App(props) {
   const {
@@ -57,12 +60,27 @@ function App(props) {
     window.history.back();
   }, []);
 
+  const { isPrevDisabled, isNextDisabled, prev, next } = useNav(
+    leaveDate,
+    cbs.prevDate,
+    cbs.nextDate
+  );
+
   if (!isSearchParsed) return null;
 
   return (
     <div className='app'>
       <div className='header-wrapper'>
         <Header title={trainNumber} handleBack={handleBack} isBackVisible={true} />
+      </div>
+      <div className='nav-wrapper'>
+        <Nav
+          date={leaveDate}
+          isPrevDisabled={isPrevDisabled}
+          isNextDisabled={isNextDisabled}
+          prev={prev}
+          next={next}
+        />
       </div>
     </div>
   );
