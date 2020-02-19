@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback } from 'react';
+import React, { lazy, Suspense, useEffect, useMemo, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as actions from './store/actions';
@@ -11,9 +11,12 @@ import Header from '../common/Header';
 import Nav from '../common/Nav';
 import Detail from './components/Detail';
 import Candidate from './components/Candidate';
-import Schedule from './components/Schedule';
+// import Schedule from './components/Schedule';
 
 import useNav from '../common/useNav';
+
+// 异步组件
+const Schedule = lazy(() => import('./components/Schedule'));
 
 function App(props) {
   const {
@@ -120,6 +123,18 @@ function App(props) {
         durationStr={durationStr}
         toggle={cbs.toggleScheduleVisible}
       />
+      {isScheduleVisible && (
+        <div className='mask' onClick={() => cbs.toggleScheduleVisible()}>
+          <Suspense fallback={<div>loading</div>}>
+            <Schedule
+              date={leaveDate}
+              trainNumber={trainNumber}
+              leaveStation={leaveStation}
+              arriveStation={arriveStation}
+            />
+          </Suspense>
+        </div>
+      )}
     </div>
   );
 }
