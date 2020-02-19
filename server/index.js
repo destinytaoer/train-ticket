@@ -4,6 +4,6 @@ const apiMocker = require('mocker-api');
 
 const app = express();
 
-apiMocker(app, path.resolve('./mocker/mocker.js'));
+apiMocker(app, path.join(__dirname, 'mocker/mocker.js'));
 
-app.listen(5000, () => console.log('service started at localhost:5000'))
+app.listen(5000, () => console.log('service started at localhost:5000'));
