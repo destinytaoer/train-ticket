@@ -60,6 +60,31 @@ function App(props) {
     document.title = trainNumber;
   }, [trainNumber]);
 
+  useEffect(() => {
+    if (!isSearchParsed) return;
+
+    const url = new URI('/rest/ticket')
+      .setSearch('date', dayjs(leaveDate).format('YYYY-MM-DD'))
+      .setSearch('trainNumber', trainNumber)
+      .toString();
+
+    fetch(url)
+      .then(res => res.json())
+      .then(result => {
+        const { detail, candidates } = result;
+
+        const { departTimeStr, arriveTimeStr, arriveDate, durationStr } = detail;
+
+        const { setLeaveTime, setArriveTime, setArriveDate, setDurationStr, setTickets } = cbs;
+
+        setLeaveTime(departTimeStr);
+        setArriveTime(arriveTimeStr);
+        setArriveDate(arriveDate);
+        setDurationStr(durationStr);
+        setTickets(candidates);
+      });
+  }, [isSearchParsed, leaveDate, trainNumber, cbs]);
+
   const handleBack = useCallback(() => {
     window.history.back();
   }, []);
