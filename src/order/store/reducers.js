@@ -9,7 +9,6 @@ import { reducer as setPriceReducer } from './setPrice';
 import { reducer as setPassengersReducer } from './setPassengers';
 import { reducer as setMenuReducer } from './setMenu';
 import { reducer as setSearchParsedReducer } from './setSearchParsed';
-import { reducer as toggleMenuVisibleReducer } from './toggleMenuVisible';
 
 const reducers = [
   setDateReducer,
@@ -21,8 +20,7 @@ const reducers = [
   setPriceReducer,
   setPassengersReducer,
   setMenuReducer,
-  setSearchParsedReducer,
-  toggleMenuVisibleReducer
+  setSearchParsedReducer
 ];
 
 export default function reducer(state = initState, action) {

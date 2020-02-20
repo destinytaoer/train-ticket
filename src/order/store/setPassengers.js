@@ -20,6 +20,7 @@ export function createAdult() {
 
       for (const key of keys) {
         if (!passenger[key]) {
+          alert('请将信息填写完整');
           return;
         }
       }
@@ -53,6 +54,7 @@ export function createChild() {
 
       for (const key of keys) {
         if (!passenger[key]) {
+          alert('请将信息填写完整');
           return;
         }
       }
@@ -98,7 +100,7 @@ export function removePassenger(id) {
   };
 }
 
-export function updatePassenger(id, data) {
+export function updatePassenger(id, data, removeKeys = []) {
   return (dispatch, getState) => {
     const { passengers } = getState();
 
@@ -106,6 +108,11 @@ export function updatePassenger(id, data) {
       if (passengers[i].id === id) {
         const newPassengers = [...passengers];
         newPassengers[i] = Object.assign({}, passengers[i], data);
+
+        for (const key of removeKeys) {
+          delete newPassengers[i][key];
+        }
+
         dispatch(setPassengers(newPassengers));
 
         break;

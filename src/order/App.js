@@ -13,6 +13,7 @@ import Account from './components/Account';
 import Choose from './components/Choose';
 import Passengers from './components/Passengers';
 import Ticket from './components/Ticket';
+import Menu from './components/Menu';
 
 function App(props) {
   const {
@@ -102,7 +103,11 @@ function App(props) {
         createChild={cbs.createChild}
         removePassenger={cbs.removePassenger}
         updatePassenger={cbs.updatePassenger}
+        showGenderMenu={cbs.showGenderMenu}
+        showFollowAdultMenu={cbs.showFollowAdultMenu}
+        showTicketTypeMenu={cbs.showTicketTypeMenu}
       />
+      <Menu isVisible={isMenuVisible} {...menu} hide={cbs.hideMenu} />
     </div>
   );
 }

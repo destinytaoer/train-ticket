@@ -12,7 +12,13 @@ export {
   removePassenger,
   updatePassenger
 } from './setPassengers';
-export { setMenu } from './setMenu';
+export {
+  setMenu,
+  hideMenu,
+  showMenu,
+  showGenderMenu,
+  showFollowAdultMenu,
+  showTicketTypeMenu
+} from './setMenu';
 export { setSearchParsed } from './setSearchParsed';
-export { toggleMenuVisible } from './toggleMenuVisible';
 export { fetchInitial } from './fetchInitial';
