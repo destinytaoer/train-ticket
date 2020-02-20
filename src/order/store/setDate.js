@@ -1,5 +1,4 @@
 import { SET_LEAVE_DATE, SET_ARRIVE_DATE } from './actionTypes';
-import { h0 } from '../../common/fp';
 
 export function setLeaveDate(date) {
   return {

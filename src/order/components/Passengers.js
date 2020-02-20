@@ -8,7 +8,7 @@ const Passenger = memo(function Passenger(props) {
   const {
     id,
     name,
-    followAdult,
+    followAdultName,
     ticketType,
     licenceNo,
     gender,
@@ -106,7 +106,7 @@ const Passenger = memo(function Passenger(props) {
               type='text'
               className='input followAdult'
               placeholder='请选择'
-              value={followAdult}
+              value={followAdultName}
               readOnly
               onClick={() => showFollowAdultMenu(id)}
             />
@@ -120,6 +120,7 @@ Passenger.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   followAdult: PropTypes.number,
+  followAdultName: PropTypes.string,
   ticketType: PropTypes.string.isRequired,
   licenceNo: PropTypes.string,
   gender: PropTypes.string,
@@ -143,6 +144,14 @@ const Passengers = memo(function Passengers(props) {
     showTicketTypeMenu
   } = props;
 
+  const nameMap = useMemo(() => {
+    const ret = {};
+    for (const passenger of passengers) {
+      ret[passenger.id] = passenger.name;
+    }
+    return ret;
+  }, [passengers]);
+
   return (
     <div className='passengers'>
       <ul>
@@ -151,6 +160,7 @@ const Passengers = memo(function Passengers(props) {
             <Passenger
               key={passenger.id}
               {...passenger}
+              followAdultName={nameMap[passenger.followAdult]}
               handleRemove={removePassenger}
               handleUpdate={updatePassenger}
               showGenderMenu={showGenderMenu}
