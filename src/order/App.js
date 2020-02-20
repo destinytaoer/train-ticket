@@ -96,6 +96,11 @@ function App(props) {
         <span style={{ display: 'block' }} className='train-icon'></span>
       </Detail>
       <Ticket price={price} type={seatType} />
+      <Passengers
+        passengers={passengers}
+        createAdult={cbs.createAdult}
+        createChild={cbs.createChild}
+      />
     </div>
   );
 }
