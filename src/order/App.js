@@ -107,6 +107,9 @@ function App(props) {
         showFollowAdultMenu={cbs.showFollowAdultMenu}
         showTicketTypeMenu={cbs.showTicketTypeMenu}
       />
+      {passengers.length > 0 && (
+        <Choose passengers={passengers} updatePassenger={cbs.updatePassenger} />
+      )}
       <Menu isVisible={isMenuVisible} {...menu} hide={cbs.hideMenu} />
     </div>
   );
