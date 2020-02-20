@@ -100,6 +100,8 @@ function App(props) {
         passengers={passengers}
         createAdult={cbs.createAdult}
         createChild={cbs.createChild}
+        removePassenger={cbs.removePassenger}
+        updatePassenger={cbs.updatePassenger}
       />
     </div>
   );

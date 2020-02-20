@@ -1,22 +1,119 @@
-import React, { memo } from 'react';
+import React, { memo, useMemo } from 'react';
 import PropTypes from 'prop-types';
 
 import './Passengers.css';
 
 const Passenger = memo(function Passenger(props) {
-  const { id } = props;
-  return <li>{id}</li>;
+  const {
+    id,
+    name,
+    followAdult,
+    ticketType,
+    licenceNo,
+    gender,
+    birthday,
+    handleRemove,
+    handleUpdate
+  } = props;
+
+  const isAdult = useMemo(() => ticketType === 'adult', [ticketType]);
+
+  return (
+    <li className='passenger'>
+      <i className='delete' onClick={() => handleRemove(id)}>
+        -
+      </i>
+      <ol className='items'>
+        <li className='item'>
+          <label className='label name'>姓名</label>
+          <input
+            type='text'
+            className='input name'
+            placeholder='乘客姓名'
+            value={name}
+            onChange={e => handleUpdate(id, { name: e.target.value })}
+          />
+          <label className='ticket-type'>{ticketType === 'adult' ? '成人票' : '儿童票'}</label>
+        </li>
+        {isAdult && (
+          <li className='item'>
+            <label className='label licenceNo'>身份证</label>
+            <input
+              type='text'
+              className='input licenceNo'
+              placeholder='乘客姓名'
+              value={licenceNo}
+              onChange={e => handleUpdate(id, { licenceNo: e.target.value })}
+            />
+          </li>
+        )}
+        {!isAdult && (
+          <li className='item arrow'>
+            <label className='label gender'>性别</label>
+            <input
+              type='text'
+              className='input gender'
+              placeholder='请选择'
+              value={gender === 'male' ? '男' : gender === 'female' ? '女' : ''}
+              readOnly
+            />
+          </li>
+        )}
+        {!isAdult && (
+          <li className='item'>
+            <label className='label birthday'>生日</label>
+            <input
+              type='text'
+              className='input birthday'
+              placeholder='如: 1995年1月5日, 则填写19950105'
+              value={birthday}
+              onChange={e => handleUpdate(id, { birthday: e.target.value })}
+            />
+          </li>
+        )}
+        {!isAdult && (
+          <li className='item arrow'>
+            <label className='label followAdult'>同行成人</label>
+            <input
+              type='text'
+              className='input followAdult'
+              placeholder='请选择'
+              value={followAdult}
+              readOnly
+            />
+          </li>
+        )}
+      </ol>
+    </li>
+  );
 });
-Passenger.propTypes = {};
+Passenger.propTypes = {
+  id: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
+  followAdult: PropTypes.number,
+  ticketType: PropTypes.string.isRequired,
+  licenceNo: PropTypes.string,
+  gender: PropTypes.string,
+  birthday: PropTypes.string,
+  handleRemove: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired
+};
 
 const Passengers = memo(function Passengers(props) {
-  const { passengers, createAdult, createChild } = props;
+  const { passengers, createAdult, createChild, removePassenger, updatePassenger } = props;
 
   return (
     <div className='passengers'>
       <ul>
         {passengers.map(passenger => {
-          return <Passenger key={passenger.id} {...passenger} />;
+          return (
+            <Passenger
+              key={passenger.id}
+              {...passenger}
+              handleRemove={removePassenger}
+              handleUpdate={updatePassenger}
+            />
+          );
         })}
       </ul>
       <section className='add'>
@@ -33,7 +130,9 @@ const Passengers = memo(function Passengers(props) {
 Passengers.propTypes = {
   passengers: PropTypes.array.isRequired,
   createAdult: PropTypes.func.isRequired,
-  createChild: PropTypes.func.isRequired
+  createChild: PropTypes.func.isRequired,
+  removePassenger: PropTypes.func.isRequired,
+  updatePassenger: PropTypes.func.isRequired
 };
 
 export default Passengers;

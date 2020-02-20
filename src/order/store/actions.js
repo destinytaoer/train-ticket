@@ -5,7 +5,13 @@ export { setSeatType } from './setSeatType';
 export { setTrainNumber } from './setTrainNumber';
 export { setDurationStr } from './setDurationStr';
 export { setPrice } from './setPrice';
-export { setPassengers, createAdult, createChild } from './setPassengers';
+export {
+  setPassengers,
+  createAdult,
+  createChild,
+  removePassenger,
+  updatePassenger
+} from './setPassengers';
 export { setMenu } from './setMenu';
 export { setSearchParsed } from './setSearchParsed';
 export { toggleMenuVisible } from './toggleMenuVisible';

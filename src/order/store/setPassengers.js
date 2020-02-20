@@ -74,14 +74,43 @@ export function createChild() {
         {
           id: ++passengerIdSeed,
           name: '',
-          gender: 'none',
+          gender: '',
           birthday: '',
-          followAdult: '',
+          followAdult: adultFound,
           ticketType: 'child',
           seat: 'Z'
         }
       ])
     );
+  };
+}
+
+export function removePassenger(id) {
+  return (dispatch, getState) => {
+    const { passengers } = getState();
+
+    // 过滤掉具有这个 id 的乘客, 同时过滤掉这个乘客同行的儿童
+    const newPassengers = passengers.filter(
+      passenger => passenger.id !== id && passenger.followAdult !== id
+    );
+
+    dispatch(setPassengers(newPassengers));
+  };
+}
+
+export function updatePassenger(id, data) {
+  return (dispatch, getState) => {
+    const { passengers } = getState();
+
+    for (let i = 0; i < passengers.length; i++) {
+      if (passengers[i].id === id) {
+        const newPassengers = [...passengers];
+        newPassengers[i] = Object.assign({}, passengers[i], data);
+        dispatch(setPassengers(newPassengers));
+
+        break;
+      }
+    }
   };
 }
 
