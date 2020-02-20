@@ -8,3 +8,19 @@ export function h0(timestamp = Date.now()) {
 
   return target.getTime();
 }
+
+export function debounce(fn, cb, wait = 350) {
+  let timer;
+  return function(...args) {
+    let context = this;
+
+    if (timer) {
+      clearTimeout(timer);
+      cb.apply(context, args);
+    }
+
+    timer = setTimeout(() => {
+      fn.apply(context, args);
+    }, wait);
+  };
+}

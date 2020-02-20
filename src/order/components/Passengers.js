@@ -1,5 +1,6 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import PropTypes from 'prop-types';
+import { debounce } from '../../common/fp';
 
 import './Passengers.css';
 
@@ -21,6 +22,27 @@ const Passenger = memo(function Passenger(props) {
 
   const isAdult = useMemo(() => ticketType === 'adult', [ticketType]);
 
+  const [curName, setCurName] = useState(name);
+  const [curLicenceNo, setCurLicenceNo] = useState(licenceNo);
+  const [curBirthday, setCurBirthday] = useState(birthday);
+
+  const { updateName, updateLicenceNo, updateBirthday } = useMemo(() => {
+    return {
+      updateName: debounce(
+        value => handleUpdate(id, { name: value }),
+        value => setCurName(value)
+      ),
+      updateLicenceNo: debounce(
+        value => handleUpdate(id, { licenceNo: value }),
+        value => setCurLicenceNo(value)
+      ),
+      updateBirthday: debounce(
+        value => handleUpdate(id, { birthday: value }),
+        value => setCurBirthday(value)
+      )
+    };
+  }, [id, handleUpdate]);
+
   return (
     <li className='passenger'>
       <i className='delete' onClick={() => handleRemove(id)}>
@@ -33,8 +55,8 @@ const Passenger = memo(function Passenger(props) {
             type='text'
             className='input name'
             placeholder='乘客姓名'
-            value={name}
-            onChange={e => handleUpdate(id, { name: e.target.value })}
+            value={curName}
+            onChange={e => updateName(e.target.value)}
           />
           <label className='ticket-type' onClick={() => showTicketTypeMenu(id)}>
             {ticketType === 'adult' ? '成人票' : '儿童票'}
@@ -47,8 +69,8 @@ const Passenger = memo(function Passenger(props) {
               type='text'
               className='input licenceNo'
               placeholder='乘客身份证号'
-              value={licenceNo}
-              onChange={e => handleUpdate(id, { licenceNo: e.target.value })}
+              value={curLicenceNo}
+              onChange={e => updateLicenceNo(e.target.value)}
             />
           </li>
         )}
@@ -72,8 +94,8 @@ const Passenger = memo(function Passenger(props) {
               type='text'
               className='input birthday'
               placeholder='如: 1995年1月5日, 则填写19950105'
-              value={birthday}
-              onChange={e => handleUpdate(id, { birthday: e.target.value })}
+              value={curBirthday}
+              onChange={e => updateBirthday(e.target.value)}
             />
           </li>
         )}
